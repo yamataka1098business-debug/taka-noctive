@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商談アシスタント</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">商談アシスタント <span class="tag">Noctive</span></div>
+    <div class="controls">
+      <span class="meter" title="相手の音量"><span class="meter-label">相手</span><span class="meter-bar"><span id="levelThem"></span></span></span>
+      <span class="meter" title="自分の音量"><span class="meter-label">自分</span><span class="meter-bar"><span id="levelMe"></span></span></span>
+      <button id="startBtn" class="primary">録音を開始</button>
+      <button id="pauseBtn" disabled>一時停止</button>
+      <button id="stopBtn" disabled>終了</button>
+    </div>
+  </header>
+
+  <div id="status" class="status" hidden></div>
+
+  <main class="layout">
+    <section class="panel transcript-panel">
+      <div class="panel-head">
+        <h2>文字起こし</h2>
+        <div class="panel-actions">
+          <button id="sampleBtn" class="ghost" title="練習用のサンプル会話を読み込みます">サンプル会話</button>
+          <button id="exportBtn" class="ghost">保存</button>
+          <button id="clearBtn" class="ghost">クリア</button>
+        </div>
+      </div>
+      <div id="transcript" class="transcript">
+        <p class="empty">「録音を開始」を押すと、ここに会話が流れます。</p>
+      </div>
+      <form id="manualForm" class="manual">
+        <select id="manualSpeaker" aria-label="話した人">
+          <option value="them">相手</option>
+          <option value="me">自分</option>
+        </select>
+        <input id="manualText" placeholder="聞き取れなかった内容やメモを手入力（Enterで追加）" autocomplete="off">
+      </form>
+    </section>
+
+    <section class="panel side-panel">
+      <div class="panel-head">
+        <h2>相手の課題とツール案</h2>
+        <div class="panel-actions">
+          <label class="toggle"><input id="autoAnalyze" type="checkbox" checked> 自動（90秒ごと）</label>
+          <button id="analyzeBtn">今すぐ分析</button>
+        </div>
+      </div>
+      <div id="summary" class="summary" hidden></div>
+      <div id="suggestions" class="suggestions">
+        <p class="empty">相手が困りごとを話すと、ここにツール案が出ます。</p>
+      </div>
+
+      <div id="builder" class="builder" hidden>
+        <div class="panel-head">
+          <h2 id="builderTitle">デモを作成中…</h2>
+          <span id="builderStat" class="muted"></span>
+        </div>
+        <pre id="builderCode" class="code"></pre>
+      </div>
+
+      <div id="demos" class="demos" hidden>
+        <h3>作ったデモ</h3>
+        <ul id="demoList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <template id="cardTpl">
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"></h3>
+        <span class="minutes"></span>
+      </div>
+      <p class="pain"></p>
+      <blockquote class="evidence"></blockquote>
+      <ul class="features"></ul>
+      <p class="wow"></p>
+      <textarea class="note" rows="2" placeholder="追加の指示（例：美容室向けに、予約枠は30分単位で）"></textarea>
+      <div class="card-actions">
+        <button class="primary act-demo">デモを自動生成</button>
+        <button class="act-prompt">Code用の指示文をコピー</button>
+        <button class="ghost act-dismiss">却下</button>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
