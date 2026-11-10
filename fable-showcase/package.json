@@ -1,0 +1,14 @@
+{
+  "name": "fable-showcase",
+  "private": true,
+  "type": "module",
+  "description": "30秒のショーケース動画をコードだけで生成する（映像: Canvas/WebGL、音: 自作シンセ）",
+  "scripts": {
+    "audio": "node audio.mjs",
+    "build": "bash build.sh"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.0.0",
+    "@fontsource/noto-sans-jp": "^5.0.0"
+  }
+}
